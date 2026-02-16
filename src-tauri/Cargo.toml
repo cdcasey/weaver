@@ -1,0 +1,55 @@
+[package]
+name = "weaver"
+version = "0.1.0"
+description = "A 3-way merge tool with tree-sitter structural merge"
+authors = []
+license = "MIT"
+edition = "2021"
+rust-version = "1.77.2"
+
+[lib]
+name = "weaver_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+tauri-plugin-log = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+similar = "2"
+thiserror = "2"
+parking_lot = "0.12"
+log = "0.4"
+tree-sitter = { version = "0.24", optional = true }
+tree-sitter-rust = { version = "0.23", optional = true }
+tree-sitter-typescript = { version = "0.23", optional = true }
+tree-sitter-javascript = { version = "0.23", optional = true }
+tree-sitter-python = { version = "0.23", optional = true }
+tree-sitter-go = { version = "0.23", optional = true }
+tree-sitter-java = { version = "0.23", optional = true }
+tree-sitter-c = { version = "0.23", optional = true }
+tree-sitter-cpp = { version = "0.23", optional = true }
+
+[features]
+default = ["tree-sitter-grammars"]
+tree-sitter-grammars = [
+    "dep:tree-sitter",
+    "dep:tree-sitter-rust",
+    "dep:tree-sitter-typescript",
+    "dep:tree-sitter-javascript",
+    "dep:tree-sitter-python",
+    "dep:tree-sitter-go",
+    "dep:tree-sitter-java",
+    "dep:tree-sitter-c",
+    "dep:tree-sitter-cpp",
+]
+
+[profile.release]
+lto = true
+strip = true
+opt-level = "s"
+panic = "abort"
+codegen-units = 1

@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "Bash(pnpm add:*)",
+      "Bash(export PATH=\"$HOME/.cargo/bin:$PATH\")",
+      "Bash(cargo check:*)",
+      "Bash(npx tsc:*)",
+      "Bash(node -e:*)",
+      "Bash(pnpm tauri build:*)"
+    ]
+  }
+}
